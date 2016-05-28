@@ -6,7 +6,11 @@ This is just a small script to make a raspberry pi or any other linux based syst
 
 Install php on your raspberry pi: 
 
-	sudo apt-get install php5
+	sudo apt-get update -y
+	sudo apt-get install php5 -y
+	sudo apt-get install php5-curl -y
+
+Or just call the `install-php.sh` that is delivered with this script.
 
 Please check out [RaumfeldAlarm 1](https://github.com/blaues0cke/RaumfeldAlarm) if you want a pure bash solution. I was too lazy to finish the first version. Writing this in php was much easier.
 
