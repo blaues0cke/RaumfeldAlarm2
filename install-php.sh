@@ -12,5 +12,6 @@ echo "Installing php"
 
 apt-get update -y
 apt-get install php5 -y
+apt-get install php5-curl -y
 
 echo "Done!"

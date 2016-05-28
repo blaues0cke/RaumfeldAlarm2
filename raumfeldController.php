@@ -167,7 +167,13 @@ class RaumfeldController
 
 		foreach ($matches[1] as $index => $match)
 		{
-			$newDevice      = ['name' => $matches[2][$index]];
+			$newDevice = [];
+
+			if (!empty($matches[2]) && !empty($matches[2][$index]))
+			{
+				$newDevice['name'] = $matches[2][$index]; 
+			}
+
 			$explodedString = explode('\' ', $match);
 
 			foreach ($explodedString as $dataPart)
