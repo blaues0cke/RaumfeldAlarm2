@@ -148,6 +148,7 @@ class RaumfeldController
 		curl_setopt($ch, CURLOPT_URL, 	         $url);
 		curl_setopt($ch, CURLOPT_POST,           !empty($postData));
 		curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+		curl_setopt($ch, CURLOPT_FOLLOWLOCATION, true);
 
 		if (!empty($postData))
 		{
@@ -160,12 +161,14 @@ class RaumfeldController
 		$this->log(' ');
 
 		curl_close($ch);
+
+		return $result;
 	}
 
 	public function loadDevices ()
 	{
 		$newDeviceList  = [];
-		$deviceListData = file_get_contents('http://'.$this->baseIp.':47365/listDevices');
+		$deviceListData = $this->httpRequest('http://'.$this->baseIp.':47365/listDevices');
 		preg_match_all('/<device (.*?)>(.*?)<\/device>/is', $deviceListData, $matches);
 
 		foreach ($matches[1] as $index => $match)
@@ -203,7 +206,7 @@ class RaumfeldController
 	public function loadZones ()
 	{
 		$newZoneList  = [];
-		$zoneListData = file_get_contents('http://'.$this->baseIp.':47365/getZones');
+		$zoneListData = $this->httpRequest('http://'.$this->baseIp.':47365/getZones');
 		
 		preg_match_all('/<(?:zone|unassignedRooms)( .*?|)>(.*?)<\/(?:zone|unassignedRooms)>/is', $zoneListData, $matches);
 
