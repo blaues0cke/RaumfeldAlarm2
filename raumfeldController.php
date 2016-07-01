@@ -156,6 +156,9 @@ class RaumfeldController
 
 		$result = curl_exec($ch);
 
+		$this->log('Done, response: '.(empty($result) ? '<empty response>' : $result));
+		$this->log(' ');
+
 		curl_close($ch);
 	}
 
