@@ -111,20 +111,31 @@ class RaumfeldController
 
 	public function findBase ()
 	{
-		return $this->findDeviceWithIp($this->baseIp);
+		return $this->findRendererWithIpAnd($this->baseIp);
 	}
 
-	public function findDeviceWithIp ($ip)
+	public function findDeviceWithIp ($ip, $type = null)
 	{
 		foreach ($this->devices as $device)
 		{
-			if (strpos($device['location'], $ip) !== false)
+			if (
+				strpos($device['location'].':', $ip.':') !== false &&
+				(
+					$type 						   === null ||
+					strpos($device['type'], $type) !== false
+				)
+			)
 			{
 				return $device;
 			}
 		}
 
 		return false;
+	}
+
+	public function findRendererWithIpAnd ($ip)
+	{
+		return $this->findDeviceWithIp($ip, 'MediaRenderer');
 	}
 
 	protected function httpRequest ($url, $postData = null, $soapAction = null)
