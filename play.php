@@ -8,6 +8,6 @@ $raumfeldController->setVolumeInAllRoomsTo(0);
 $raumfeldController->addAllRoomsToFirstZone();
 $raumfeldController->stopMusic();
 $raumfeldController->setVolumeInAllRoomsTo(0);
-$raumfeldController->playTuneInJahfari();
+$raumfeldController->playRandomTuneInRadio();
 $raumfeldController->sleep(40);
 $raumfeldController->fadeVolumeInAllRoomsTo(50);

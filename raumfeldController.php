@@ -275,6 +275,35 @@ class RaumfeldController
 		echo '> '.$text."\n";
 	}
 
+	public function playRandomTuneInRadio ()
+	{
+		$radios = array
+		(
+			'playTuneInHerrMerkt',
+			'playTuneInJahfari',
+			'playTuneInRawFM'
+		);
+
+		$function = $radios[array_rand($radios)];
+
+		$this->$function();
+	}
+
+	public function playTuneInHerrMerkt ()
+	{
+		$this->log('Playing herr merkt');
+
+		$baseDevice = $this->findBase();
+
+		$this->httpRequest(
+			'http://'.$baseDevice['ip'].'/TransportService/Control',
+			'<?xml version="1.0"?><s:Envelope xmlns:s="http://schemas.xmlsoap.org/soap/envelope/" s:encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"><s:Body><u:SetAVTransportURI xmlns:u="urn:schemas-upnp-org:service:AVTransport:1"><CurrentURIMetaData>&lt;DIDL-Lite xmlns=&quot;urn:schemas-upnp-org:metadata-1-0/DIDL-Lite/&quot; xmlns:dc=&quot;http://purl.org/dc/elements/1.1/&quot; xmlns:dlna=&quot;urn:schemas-dlna-org:metadata-1-0/&quot; xmlns:upnp=&quot;urn:schemas-upnp-org:metadata-1-0/upnp/&quot; xmlns:raumfeld=&quot;urn:schemas-raumfeld-com:meta-data/raumfeld&quot;&gt;&lt;item restricted=&quot;1&quot; id=&quot;0/RadioTime/Search/s-s97342&quot; parentID=&quot;0/RadioTime/Search&quot;&gt;&lt;dc:title&gt;Herr Merkt Radio&lt;/dc:title&gt;&lt;upnp:signalStrength&gt;100&lt;/upnp:signalStrength&gt;&lt;raumfeld:section&gt;RadioTime&lt;/raumfeld:section&gt;&lt;upnp:class&gt;object.item.audioItem.audioBroadcast.radio&lt;/upnp:class&gt;&lt;raumfeld:ebrowse&gt;http://opml.radiotime.com/Tune.ashx?partnerId=7aJ9pvV5&amp;amp;formats=wma%2Cmp3%2Cogg&amp;amp;serial=00%3A0d%3Ab9%3A24%3A50%3A14&amp;amp;id=s97342&amp;amp;c=ebrowse&lt;/raumfeld:ebrowse&gt;&lt;upnp:albumArtURI&gt;http://cdn-radiotime-logos.tunein.com/s97342q.png&lt;/upnp:albumArtURI&gt;&lt;raumfeld:name&gt;Station&lt;/raumfeld:name&gt;&lt;res protocolInfo=&quot;http-get:*:audio/x-mpegurl:*&quot;&gt;http://opml.radiotime.com/Tune.ashx?id=s97342&amp;amp;formats=wma,mp3,ogg&amp;amp;partnerId=7aJ9pvV5&amp;amp;serial=00:0d:b9:24:50:14&lt;/res&gt;&lt;raumfeld:durability&gt;117&lt;/raumfeld:durability&gt;&lt;/item&gt;&lt;/DIDL-Lite&gt;</CurrentURIMetaData><InstanceID>0</InstanceID><CurrentURI>http://opml.radiotime.com/Tune.ashx?id=s97342&amp;formats=wma,mp3,ogg&amp;partnerId=7aJ9pvV5&amp;serial=00:0d:b9:24:50:14</CurrentURI></u:SetAVTransportURI></s:Body></s:Envelope>',
+			'urn:schemas-upnp-org:service:AVTransport:1#SetAVTransportURI'
+		);
+
+		$this->log('Done');
+	}
+
 	public function playTuneInJahfari ()
 	{
 		$this->log('Playing jahfari');
@@ -284,6 +313,21 @@ class RaumfeldController
 		$this->httpRequest(
 			'http://'.$baseDevice['ip'].'/TransportService/Control',
 			'<?xml version="1.0"?><s:Envelope xmlns:s="http://schemas.xmlsoap.org/soap/envelope/" s:encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"><s:Body><u:SetAVTransportURI xmlns:u="urn:schemas-upnp-org:service:AVTransport:1"><CurrentURIMetaData>&lt;DIDL-Lite xmlns=&quot;urn:schemas-upnp-org:metadata-1-0/DIDL-Lite/&quot; xmlns:dc=&quot;http://purl.org/dc/elements/1.1/&quot; xmlns:dlna=&quot;urn:schemas-dlna-org:metadata-1-0/&quot; xmlns:upnp=&quot;urn:schemas-upnp-org:metadata-1-0/upnp/&quot; xmlns:raumfeld=&quot;urn:schemas-raumfeld-com:meta-data/raumfeld&quot;&gt;&lt;item restricted=&quot;1&quot; id=&quot;0/RadioTime/Search/s-s100890&quot; parentID=&quot;0/RadioTime/Search&quot;&gt;&lt;dc:title&gt;JAHFARI&lt;/dc:title&gt;&lt;upnp:signalStrength&gt;97&lt;/upnp:signalStrength&gt;&lt;raumfeld:section&gt;RadioTime&lt;/raumfeld:section&gt;&lt;upnp:class&gt;object.item.audioItem.audioBroadcast.radio&lt;/upnp:class&gt;&lt;raumfeld:ebrowse&gt;http://opml.radiotime.com/Tune.ashx?partnerId=7aJ9pvV5&amp;amp;formats=wma%2Cmp3%2Cogg&amp;amp;serial=00%3A0d%3Ab9%3A24%3A50%3A14&amp;amp;id=s100890&amp;amp;c=ebrowse&lt;/raumfeld:ebrowse&gt;&lt;upnp:albumArtURI&gt;http://cdn-radiotime-logos.tunein.com/s100890q.png&lt;/upnp:albumArtURI&gt;&lt;raumfeld:name&gt;Station&lt;/raumfeld:name&gt;&lt;res protocolInfo=&quot;http-get:*:audio/x-mpegurl:*&quot;&gt;http://opml.radiotime.com/Tune.ashx?id=s100890&amp;amp;formats=wma,mp3,ogg&amp;amp;partnerId=7aJ9pvV5&amp;amp;serial=00:0d:b9:24:50:14&lt;/res&gt;&lt;raumfeld:durability&gt;115&lt;/raumfeld:durability&gt;&lt;/item&gt;&lt;/DIDL-Lite&gt;</CurrentURIMetaData><InstanceID>0</InstanceID><CurrentURI>http://opml.radiotime.com/Tune.ashx?id=s100890&amp;formats=wma,mp3,ogg&amp;partnerId=7aJ9pvV5&amp;serial=00:0d:b9:24:50:14</CurrentURI></u:SetAVTransportURI></s:Body></s:Envelope>',
+			'urn:schemas-upnp-org:service:AVTransport:1#SetAVTransportURI'
+		);
+
+		$this->log('Done');
+	}
+
+	public function playTuneInRawFM ()
+	{
+		$this->log('Playing raw fm');
+
+		$baseDevice = $this->findBase();
+
+		$this->httpRequest(
+			'http://'.$baseDevice['ip'].'/TransportService/Control',
+			'<?xml version="1.0"?><s:Envelope xmlns:s="http://schemas.xmlsoap.org/soap/envelope/" s:encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"><s:Body><u:SetAVTransportURI xmlns:u="urn:schemas-upnp-org:service:AVTransport:1"><CurrentURIMetaData>&lt;DIDL-Lite xmlns=&quot;urn:schemas-upnp-org:metadata-1-0/DIDL-Lite/&quot; xmlns:dc=&quot;http://purl.org/dc/elements/1.1/&quot; xmlns:dlna=&quot;urn:schemas-dlna-org:metadata-1-0/&quot; xmlns:upnp=&quot;urn:schemas-upnp-org:metadata-1-0/upnp/&quot; xmlns:raumfeld=&quot;urn:schemas-raumfeld-com:meta-data/raumfeld&quot;&gt;&lt;item restricted=&quot;1&quot; id=&quot;0/RadioTime/Search/s-s82747&quot; parentID=&quot;0/RadioTime/Search&quot;&gt;&lt;dc:title&gt;Raw FM&lt;/dc:title&gt;&lt;upnp:signalStrength&gt;98&lt;/upnp:signalStrength&gt;&lt;raumfeld:section&gt;RadioTime&lt;/raumfeld:section&gt;&lt;upnp:class&gt;object.item.audioItem.audioBroadcast.radio&lt;/upnp:class&gt;&lt;raumfeld:ebrowse&gt;http://opml.radiotime.com/Tune.ashx?partnerId=7aJ9pvV5&amp;amp;formats=wma%2Cmp3%2Cogg&amp;amp;serial=00%3A0d%3Ab9%3A24%3A50%3A14&amp;amp;id=s82747&amp;amp;c=ebrowse&lt;/raumfeld:ebrowse&gt;&lt;upnp:albumArtURI&gt;http://cdn-radiotime-logos.tunein.com/s82747q.png&lt;/upnp:albumArtURI&gt;&lt;raumfeld:name&gt;Station&lt;/raumfeld:name&gt;&lt;res protocolInfo=&quot;http-get:*:audio/x-mpegurl:*&quot;&gt;http://opml.radiotime.com/Tune.ashx?id=s82747&amp;amp;formats=wma,mp3,ogg&amp;amp;partnerId=7aJ9pvV5&amp;amp;serial=00:0d:b9:24:50:14&lt;/res&gt;&lt;raumfeld:durability&gt;115&lt;/raumfeld:durability&gt;&lt;/item&gt;&lt;/DIDL-Lite&gt;</CurrentURIMetaData><InstanceID>0</InstanceID><CurrentURI>http://opml.radiotime.com/Tune.ashx?id=s82747&amp;formats=wma,mp3,ogg&amp;partnerId=7aJ9pvV5&amp;serial=00:0d:b9:24:50:14</CurrentURI></u:SetAVTransportURI></s:Body></s:Envelope>',
 			'urn:schemas-upnp-org:service:AVTransport:1#SetAVTransportURI'
 		);
 
