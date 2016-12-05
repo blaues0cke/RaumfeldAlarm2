@@ -74,7 +74,6 @@ class RaumfeldController
 
 			foreach ($this->zones as $zone)
 			{
-				var_dump($zone);
 				if (!empty($zone['udn']))
 				{
 					$zoneUdn = $zone['udn'];
