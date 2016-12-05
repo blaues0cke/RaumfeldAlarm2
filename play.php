@@ -2,7 +2,7 @@
 
 require_once('raumfeldController.php');
 
-$raumfeldController = new RaumfeldController('192.168.0.10');
+$raumfeldController = new RaumfeldController('192.168.0.101');
 $raumfeldController->stopMusic();
 $raumfeldController->setVolumeInAllRoomsTo(0);
 $raumfeldController->addAllRoomsToFirstZone();
